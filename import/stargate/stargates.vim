@@ -10,7 +10,9 @@ enddef
 
 
 def Designations(length: number): list<string>
-    const ds = ws.LabelLists(g:stargate_chars, length)
+    # Use `final` instead of `const` as a workaround against `E1307: Argument 1: Trying to modify a const any`.
+    # cf. https://github.com/vim/vim/issues/11490
+    final ds = ws.LabelLists(g:stargate_chars, length)
 
     # remove unwanted labels from start and end of the label list
     var slice = ds.labels[ds.start_row : ds.end_row]
